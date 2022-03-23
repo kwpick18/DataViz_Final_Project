@@ -29,6 +29,7 @@ other_situations <- hockey_data %>%
   filter(situation == "other") 
 ```
 
+# Get the data set into a workable place that I can wrap my head around
 ```{r}
 PP_all_situations <- pittsburgh_penguins %>%
   filter(situation == "all") 
@@ -44,5 +45,56 @@ PP_short_handed <- pittsburgh_penguins %>%
 
 PP_other_situations <- pittsburgh_penguins %>%
   filter(situation == "other") 
+```
+
+# Start even smaller to get some perspective
+```{r}
+Pitt_2017 <- pittsburgh_penguins %>%
+  filter(season == "2017") 
+```
+
+```{r}
+PP_all_situations_small <- Pitt_2017 %>%
+  filter(situation == "all") 
+
+PP_even_strength_small <- Pitt_2017 %>%
+  filter(situation == "5on5")
+
+PP_power_play_small <- Pitt_2017 %>%
+  filter(situation == "5on4")
+
+PP_short_handed_small <- Pitt_2017 %>%
+  filter(situation == "4on5")
+
+PP_other_situations_small <- Pitt_2017 %>%
+  filter(situation == "other")
+```
+# Still so many observations. Start with looking at just one situation (PowerPlay) 
+
+```{r}
+Smallest_Powerplay_df <- PP_power_play_small
+# A good place to start is to look at the proportion of goals that come from each category of low danger, medium danger, and high danger goals for. 
+
+```
+
+
+
+```{r}
+library(shiny)
+
+ui <- fluidPage(sidebarLayout(sidebarPanel(
+    selectizeInput("gamechoice",
+    label = "Choose an Opponent", choices = levels(factor(Smallest_Powerplay_df$opposingTeam)),
+    selected = "STL")),
+                mainPanel()
+                )
+  
+)
+
+server <- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
 ```
 
