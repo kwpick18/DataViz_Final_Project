@@ -1,0 +1,48 @@
+---
+title: "Final_Project"
+author: "Kaden Pickering"
+date: "3/21/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse) 
+
+hockey_data <- read_csv("all_teams.csv") 
+pittsburgh_penguins <- read_csv("Pittsburgh_data.csv") 
+```
+
+```{r}
+all_situations <- hockey_data %>%
+  filter(situation == "all") 
+
+even_strength <- hockey_data %>%
+  filter(situation == "5on5")
+
+power_play <- hockey_data %>%
+  filter(situation == "5on4")
+
+short_handed <- hockey_data %>%
+  filter(situation == "4on5")
+
+other_situations <- hockey_data %>%
+  filter(situation == "other") 
+```
+
+```{r}
+PP_all_situations <- pittsburgh_penguins %>%
+  filter(situation == "all") 
+
+PP_even_strength <- pittsburgh_penguins %>%
+  filter(situation == "5on5")
+
+PP_power_play <- pittsburgh_penguins %>%
+  filter(situation == "5on4")
+
+PP_short_handed <- pittsburgh_penguins %>%
+  filter(situation == "4on5")
+
+PP_other_situations <- pittsburgh_penguins %>%
+  filter(situation == "other") 
+```
+
