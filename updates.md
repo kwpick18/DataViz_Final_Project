@@ -9,3 +9,7 @@ Sifted through the data to make a plan of where to go from here as well as got m
 ## March 23 end of class
 
 Continued to get my data set smaller and smaller so I can work on one particular area. Began making my first portion of the shiny app which will look at percentage of low danger, medium danger, and high danger goals for pittsburgh against each team. 
+
+## March 28th Beginning of class
+
+Over the weekend, I began working on the first part of my app using the low, medium, and high danger variables. As I got about an hour in and began trying to run my data that I had, I realized the variables weren't what I thought they were. Long story short, I switched my approach and began using shot attempts, shots on goal, and goals for to try to find a correlation between number of goals and shots on the power play. I'm starting small and working from there. 

@@ -71,28 +71,59 @@ PP_other_situations_small <- Pitt_2017 %>%
 ```
 # Still so many observations. Start with looking at just one situation (PowerPlay) 
 
+# The more shots, the better chance of scoring on the powerplay...right? Let's see if that theory checks out. 
 ```{r}
+library(tidyverse) 
+
 Smallest_Powerplay_df <- PP_power_play_small
-# A good place to start is to look at the proportion of goals that come from each category of low danger, medium danger, and high danger goals for. 
+
+
+ PP_shots <- PP_power_play_small %>%
+  select(opposingTeam, shotAttemptsFor, shotsOnGoalFor, goalsFor) %>%
+   mutate(propShotsThrough = shotsOnGoalFor / shotAttemptsFor) 
 
 ```
 
 
+```{r}
+#shotsThrough_sub <- PP_shots %>% 
+  #filter(opposingTeam == "WSH")
+
+ggplot(PP_shots, aes(x = propShotsThrough, y = goalsFor)) +
+  geom_dotplot()
+```
+
 
 ```{r}
+var_choices <- names(type_of_goal)[2:4]
+
 library(shiny)
 
 ui <- fluidPage(sidebarLayout(sidebarPanel(
     selectizeInput("gamechoice",
-    label = "Choose an Opponent", choices = levels(factor(Smallest_Powerplay_df$opposingTeam)),
+    label = "Choose an Opponent", choices = levels(factor(type_of_goal$opposingTeam)),
     selected = "STL")),
-                mainPanel()
+    radioButtons("varchoice", label = "Choose a Category",
+                 choices = var_choices),
+                mainPanel(plotOutput("histograph"))
                 )
   
 )
 
 server <- function(input, output, session) {
   
+  small_type_sub <- reactive({
+    type_of_goal %>% filter(opposingTeam == input$gamechoice)
+  })
+  
+  hist_plot <- reactive({
+    ggplot(small_type_sub(), aes(x = .data[[input$varchoice]])) +
+      geom_histogram(colour = "black", fill = "white")
+  })
+  
+  output$histgraph <- renderPlot({
+    hist_plot()
+  })
 }
 
 shinyApp(ui, server)
