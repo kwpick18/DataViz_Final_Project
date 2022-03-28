@@ -13,3 +13,7 @@ Continued to get my data set smaller and smaller so I can work on one particular
 ## March 28th Beginning of class
 
 Over the weekend, I began working on the first part of my app using the low, medium, and high danger variables. As I got about an hour in and began trying to run my data that I had, I realized the variables weren't what I thought they were. Long story short, I switched my approach and began using shot attempts, shots on goal, and goals for to try to find a correlation between number of goals and shots on the power play. I'm starting small and working from there. 
+
+## March 28th End of class
+
+During class, I was able to troubleshoot some things I had going wrong with the first part of my app. I got my scatterplot to be reactive to what I wanted to show (goals for compared to proportion of shots getting through to the net) and began to plan the next part of my project. Next, I'd like to offer a shiny app where the user can decide what situation to look at (even strength, powerplay, PK) using radio buttons to see the trends in that data as well. 

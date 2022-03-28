@@ -75,57 +75,72 @@ PP_other_situations_small <- Pitt_2017 %>%
 ```{r}
 library(tidyverse) 
 
-Smallest_Powerplay_df <- PP_power_play_small
 
 
  PP_shots <- PP_power_play_small %>%
   select(opposingTeam, shotAttemptsFor, shotsOnGoalFor, goalsFor) %>%
-   mutate(propShotsThrough = shotsOnGoalFor / shotAttemptsFor) 
+   mutate(propShotsThrough = shotsOnGoalFor / shotAttemptsFor) %>%
+   rename(goalsFor = goalsFor) 
 
 ```
 
 
 ```{r}
-#shotsThrough_sub <- PP_shots %>% 
-  #filter(opposingTeam == "WSH")
+shotsThrough_sub <- PP_shots %>% 
+  filter(opposingTeam == "WSH")
 
-ggplot(PP_shots, aes(x = propShotsThrough, y = goalsFor)) +
-  geom_dotplot()
+ ggplot(shotsThrough_sub, aes(x = propShotsThrough, y = goalsFor)) +
+  geom_point()
 ```
 
 
 ```{r}
-var_choices <- names(type_of_goal)[2:4]
+# var_choices <- names(PP_shots)[2:4]
 
 library(shiny)
 
 ui <- fluidPage(sidebarLayout(sidebarPanel(
-    selectizeInput("gamechoice",
-    label = "Choose an Opponent", choices = levels(factor(type_of_goal$opposingTeam)),
+    selectizeInput("opponentchoice",
+    label = "Choose an Opponent", choices = levels(factor(PP_shots$opposingTeam)),
     selected = "STL")),
-    radioButtons("varchoice", label = "Choose a Category",
-                 choices = var_choices),
-                mainPanel(plotOutput("histograph"))
+    #radioButtons("varchoice", label = "Choose a Category",
+                 #choices = var_choices),
+                mainPanel(plotOutput("scatterplot"))
                 )
   
 )
 
 server <- function(input, output, session) {
   
-  small_type_sub <- reactive({
-    type_of_goal %>% filter(opposingTeam == input$gamechoice)
+  shotsThrough_sub <- reactive({
+    PP_shots %>% filter(opposingTeam == input$opponentchoice)
   })
   
-  hist_plot <- reactive({
-    ggplot(small_type_sub(), aes(x = .data[[input$varchoice]])) +
-      geom_histogram(colour = "black", fill = "white")
+  scatter_plot <- reactive({ 
+    ggplot(shotsThrough_sub(), aes(x = goalsFor, y = propShotsThrough)) +
+  geom_point() +
+    theme_classic()
   })
   
-  output$histgraph <- renderPlot({
-    hist_plot()
+  output$scatterplot <- renderPlot({
+    scatter_plot()
   })
 }
 
 shinyApp(ui, server)
 ```
 
+#Extra code for shiny 
+
+ small_shotsThrough_sub <- reactive({
+    shotsThrough_sub %>% filter(opposingTeam == input$gamechoice)
+  })
+  
+  scatter_plot <- reactive({
+    ggplot(small_shotsThrough_sub(), aes(x = .data[[input$varchoice]])) +
+      geom_point()
+  })
+  
+  output$scatterplot <- renderPlot({
+    scatter_plot()
+  })
