@@ -17,3 +17,7 @@ Over the weekend, I began working on the first part of my app using the low, med
 ## March 28th End of class
 
 During class, I was able to troubleshoot some things I had going wrong with the first part of my app. I got my scatterplot to be reactive to what I wanted to show (goals for compared to proportion of shots getting through to the net) and began to plan the next part of my project. Next, I'd like to offer a shiny app where the user can decide what situation to look at (even strength, powerplay, PK) using radio buttons to see the trends in that data as well. 
+
+## March 30th Beginning of Class
+
+I was playing with my first app for some time trying to clean it up and make it look nicer. I learned how to add a title to it which was easy but I couldn't do a facet_wrap function to my scatterplot output like I would like to do. I also kind of figured out my hypothesis for what I want this project to examine. "More shots = More goals?"
