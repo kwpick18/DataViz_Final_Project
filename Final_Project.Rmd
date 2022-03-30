@@ -78,7 +78,7 @@ library(tidyverse)
 
 
  PP_shots <- PP_power_play_small %>%
-  select(opposingTeam, shotAttemptsFor, shotsOnGoalFor, goalsFor) %>%
+  select(opposingTeam, shotAttemptsFor, shotsOnGoalFor, goalsFor, gameId) %>%
    mutate(propShotsThrough = shotsOnGoalFor / shotAttemptsFor) %>%
    rename(goalsFor = goalsFor) 
 
@@ -95,16 +95,16 @@ shotsThrough_sub <- PP_shots %>%
 
 
 ```{r}
-# var_choices <- names(PP_shots)[2:4]
-
 library(shiny)
 
-ui <- fluidPage(sidebarLayout(sidebarPanel(
+ui <- fluidPage(
+  
+  titlePanel("Do More Successful Shot Attempts Lead to More Goals on the PowerPlay?"), 
+  
+  sidebarLayout(sidebarPanel(
     selectizeInput("opponentchoice",
     label = "Choose an Opponent", choices = levels(factor(PP_shots$opposingTeam)),
     selected = "STL")),
-    #radioButtons("varchoice", label = "Choose a Category",
-                 #choices = var_choices),
                 mainPanel(plotOutput("scatterplot"))
                 )
   
@@ -119,7 +119,8 @@ server <- function(input, output, session) {
   scatter_plot <- reactive({ 
     ggplot(shotsThrough_sub(), aes(x = goalsFor, y = propShotsThrough)) +
   geom_point() +
-    theme_classic()
+    theme_classic() + 
+      labs(x = "Goals Scored on the PowerPlay", y = "Proportion of Shot Attempts On Net")
   })
   
   output$scatterplot <- renderPlot({
@@ -144,3 +145,13 @@ shinyApp(ui, server)
   output$scatterplot <- renderPlot({
     scatter_plot()
   })
+  
+  
+  
+  #radioButtons("varchoice", label = "Choose a Category",
+                 #choices = var_choices),
+                 
+                 # var_choices <- names(PP_shots)[2:4]
+                 
+                 
+  Tomorrow, 3/30, begin making second part of app with radio buttons to choose all situations of shots to see it on a wider scale for the 2017 pittsburgh penguins. Also, ask how to create a reactive table for each. 
