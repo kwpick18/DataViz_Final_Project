@@ -10,3 +10,7 @@ Charlie: he is making an internal R package that helps beginners with R and Rstu
 
 Shane: he is making a shiny app that mimics what the advanced stats of English Premier league soccer players look like in the FIFA video game. He has multiple data sets to look at advanced stats on in order to create graphics showing what each players strong and weak points are. He helped me to see that I need to think of ideas of how to get outside of what we've done in class. 
 
+## March 30th 
+
+Kyle: He is making a shiny app similar to mine where he is looking at NFL stats from last year to make visualizations for different statistics. From collaborating with him, I learned how to do different panels within the shiny app for different visualizations which could be helpful with my own project as well. 
+

@@ -102,10 +102,11 @@ ui <- fluidPage(
   titlePanel("Do More Successful Shot Attempts Lead to More Goals on the PowerPlay?"), 
   
   sidebarLayout(sidebarPanel(
-    selectizeInput("opponentchoice",
+    selectInput("opponentchoice",
     label = "Choose an Opponent", choices = levels(factor(PP_shots$opposingTeam)),
     selected = "STL")),
-                mainPanel(plotOutput("scatterplot"))
+                mainPanel(plotOutput("scatterplot"),
+                          tableOutput("goaltable"))
                 )
   
 )
@@ -120,11 +121,21 @@ server <- function(input, output, session) {
     ggplot(shotsThrough_sub(), aes(x = goalsFor, y = propShotsThrough)) +
   geom_point() +
     theme_classic() + 
+    facet_wrap(~ gameId) +
       labs(x = "Goals Scored on the PowerPlay", y = "Proportion of Shot Attempts On Net")
+  })
+  
+  reactive_table <- reactive({
+    #######table######
   })
   
   output$scatterplot <- renderPlot({
     scatter_plot()
+  })
+  
+  output$goaltable <- renderTable({
+    reactive_table()
+      
   })
 }
 

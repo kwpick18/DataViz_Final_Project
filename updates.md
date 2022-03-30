@@ -21,3 +21,7 @@ During class, I was able to troubleshoot some things I had going wrong with the 
 ## March 30th Beginning of Class
 
 I was playing with my first app for some time trying to clean it up and make it look nicer. I learned how to add a title to it which was easy but I couldn't do a facet_wrap function to my scatterplot output like I would like to do. I also kind of figured out my hypothesis for what I want this project to examine. "More shots = More goals?"
+
+## March 30th End of Class 
+
+I made some progress in my understanding as well as in the app itself. I finally was able to facet my graphs but still not in the format that I want. I made headway on creating a reactive table below the visualization to make understanding the data easier for the viewer. I may even add panels to the app to make it less messy. 
