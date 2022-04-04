@@ -85,7 +85,7 @@ shotsThrough_sub <- Pitt_2017 %>%
 
 ```{r}
 PPtableData <- Pitt_2017 %>%
-  select(situation, propShotsThrough,  )
+  select(gameId, situation, shotsOnGoalFor, missedShotsFor, blockedShotAttemptsFor, shotAttemptsFor, goalsFor, propShotsThrough)
 ```
 
 
@@ -94,6 +94,8 @@ library(shiny)
 
 ui <- fluidPage(
   
+  tabsetPanel(
+    tabPanel("More Shots = More Goals?", fluid = TRUE, 
   titlePanel("Do More Successful Shot Attempts Lead to More Goals?"), 
   
   sidebarLayout(sidebarPanel(
@@ -104,11 +106,23 @@ ui <- fluidPage(
                           tableOutput("goaltable"))
                 )
   
-)
+),
+  tabPanel("IceTime", fluid = TRUE, 
+           titlePanel("More Icetime = More Goals?"), 
+           
+           sidebarLayout(sidebarPanel(
+             selectInput("opponentchoice", 
+            label = "Choose a Team", choices= levels(factor(Pitt_2017$opposingTeam)), selected = "NYR")), 
+            mainPanel = (plotOutput("scatter"))
+           ))))
 
 server <- function(input, output, session) {
   
   shotsThrough_sub <- reactive({
+    Pitt_2017 %>% filter(opposingTeam == input$opponentchoice)
+  })
+  
+  iceTime_sub <- reactive({
     Pitt_2017 %>% filter(opposingTeam == input$opponentchoice)
   })
   
@@ -121,8 +135,9 @@ server <- function(input, output, session) {
       labs(x = "Goals Scored", y = "Proportion of Shot Attempts On Net")
   })
   
-  reactive_table <- reactive({
-    #######table######
+  scatter_plot2 <- reactive({
+    ggplot(iceTime_sub(), aes(x = goalsFor, y = iceTime)) +
+      geom_point()
   })
   
   output$scatterplot <- renderPlot({
@@ -130,7 +145,7 @@ server <- function(input, output, session) {
   })
   
   output$goaltable <- renderTable({
-    goalFilter <- subset(Pitt_2017, Pitt_2017$propShotsThrough == input$opponentchoice)
+    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice)
       
   })
 }

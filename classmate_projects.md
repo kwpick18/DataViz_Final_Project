@@ -14,3 +14,7 @@ Shane: he is making a shiny app that mimics what the advanced stats of English P
 
 Kyle: He is making a shiny app similar to mine where he is looking at NFL stats from last year to make visualizations for different statistics. From collaborating with him, I learned how to do different panels within the shiny app for different visualizations which could be helpful with my own project as well. 
 
+## April 4th
+
+Meyer: he is making a shiny app looking at different statistics from the MLS. You can select which region you want to look at and from there you can select a team from that league to look at statistics like expected goals, assists, value of the team, etc. Just like my partner last week, he used different tabs to make the shiny app more user friendly and cleaner which is something I'd like to incorporate in my project. 
+

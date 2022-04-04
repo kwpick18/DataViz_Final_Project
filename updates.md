@@ -29,3 +29,7 @@ I made some progress in my understanding as well as in the app itself. I finally
 ## April 4th Beginning of Class
 
 I updated my original parameters for the shiny app to include all situations of play for the Pittsburgh Penguins from the 2017 season instead of only using the powerplay and changed my hypothesis as well to "more shots = more goals". I made some good progress by faceting the graphs how I wanted, by situation, and beginning to make my table. The table is tricky but I almost have it sorted. 
+
+## April 4th End of Class 
+
+I cleaned up my tabular data in my initial shiny app by selecting only columns that I'm interested in. I spent most of the time in this class researching how to create multiple tabs and am still trouble shooting. I hope to make multiple different times looking at different statistics to answer multiple questions. 
