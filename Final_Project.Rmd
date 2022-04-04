@@ -50,8 +50,11 @@ PP_other_situations <- pittsburgh_penguins %>%
 # Start even smaller to get some perspective
 ```{r}
 Pitt_2017 <- pittsburgh_penguins %>%
-  filter(season == "2017") 
+  filter(season == "2017") %>%
+  mutate(propShotsThrough = shotsOnGoalFor / shotAttemptsFor) 
+   #rename(goalsFor = goalsFor)
 ```
+
 
 ```{r}
 PP_all_situations_small <- Pitt_2017 %>%
@@ -69,28 +72,20 @@ PP_short_handed_small <- Pitt_2017 %>%
 PP_other_situations_small <- Pitt_2017 %>%
   filter(situation == "other")
 ```
-# Still so many observations. Start with looking at just one situation (PowerPlay) 
-
-# The more shots, the better chance of scoring on the powerplay...right? Let's see if that theory checks out. 
-```{r}
-library(tidyverse) 
-
-
-
- PP_shots <- PP_power_play_small %>%
-  select(opposingTeam, shotAttemptsFor, shotsOnGoalFor, goalsFor, gameId) %>%
-   mutate(propShotsThrough = shotsOnGoalFor / shotAttemptsFor) %>%
-   rename(goalsFor = goalsFor) 
-
-```
-
+ 
+# The more shots, the better chance of scoring...right? Let's see if that theory checks out in all situations. 
 
 ```{r}
-shotsThrough_sub <- PP_shots %>% 
+shotsThrough_sub <- Pitt_2017 %>% 
   filter(opposingTeam == "WSH")
 
  ggplot(shotsThrough_sub, aes(x = propShotsThrough, y = goalsFor)) +
   geom_point()
+```
+
+```{r}
+PPtableData <- Pitt_2017 %>%
+  select(situation, propShotsThrough,  )
 ```
 
 
@@ -99,11 +94,11 @@ library(shiny)
 
 ui <- fluidPage(
   
-  titlePanel("Do More Successful Shot Attempts Lead to More Goals on the PowerPlay?"), 
+  titlePanel("Do More Successful Shot Attempts Lead to More Goals?"), 
   
   sidebarLayout(sidebarPanel(
     selectInput("opponentchoice",
-    label = "Choose an Opponent", choices = levels(factor(PP_shots$opposingTeam)),
+    label = "Choose an Opponent", choices = levels(factor(Pitt_2017$opposingTeam)),
     selected = "STL")),
                 mainPanel(plotOutput("scatterplot"),
                           tableOutput("goaltable"))
@@ -114,15 +109,16 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   shotsThrough_sub <- reactive({
-    PP_shots %>% filter(opposingTeam == input$opponentchoice)
+    Pitt_2017 %>% filter(opposingTeam == input$opponentchoice)
   })
   
   scatter_plot <- reactive({ 
     ggplot(shotsThrough_sub(), aes(x = goalsFor, y = propShotsThrough)) +
-  geom_point() +
+  geom_point() + 
+      geom_smooth(method = lm) +
     theme_classic() + 
-    facet_wrap(~ gameId) +
-      labs(x = "Goals Scored on the PowerPlay", y = "Proportion of Shot Attempts On Net")
+    facet_wrap(~ situation) +
+      labs(x = "Goals Scored", y = "Proportion of Shot Attempts On Net")
   })
   
   reactive_table <- reactive({
@@ -134,7 +130,7 @@ server <- function(input, output, session) {
   })
   
   output$goaltable <- renderTable({
-    reactive_table()
+    goalFilter <- subset(Pitt_2017, Pitt_2017$propShotsThrough == input$opponentchoice)
       
   })
 }

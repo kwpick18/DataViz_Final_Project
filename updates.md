@@ -25,3 +25,7 @@ I was playing with my first app for some time trying to clean it up and make it 
 ## March 30th End of Class 
 
 I made some progress in my understanding as well as in the app itself. I finally was able to facet my graphs but still not in the format that I want. I made headway on creating a reactive table below the visualization to make understanding the data easier for the viewer. I may even add panels to the app to make it less messy. 
+
+## April 4th Beginning of Class
+
+I updated my original parameters for the shiny app to include all situations of play for the Pittsburgh Penguins from the 2017 season instead of only using the powerplay and changed my hypothesis as well to "more shots = more goals". I made some good progress by faceting the graphs how I wanted, by situation, and beginning to make my table. The table is tricky but I almost have it sorted. 
