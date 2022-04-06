@@ -33,3 +33,7 @@ I updated my original parameters for the shiny app to include all situations of 
 ## April 4th End of Class 
 
 I cleaned up my tabular data in my initial shiny app by selecting only columns that I'm interested in. I spent most of the time in this class researching how to create multiple tabs and am still trouble shooting. I hope to make multiple different times looking at different statistics to answer multiple questions. 
+
+## April 6th Beginning of Class
+
+I figured out how to create a second tab and began working on what to put in that tab. I tried a similar thing to my first tab but I didn't like that they were almost the same thing. I'm now trying to manipulate the data so I can look at the correlation between icetime for a team on the Powerplay and total powerplay goals over the course of all seasons recorded in my data set. 

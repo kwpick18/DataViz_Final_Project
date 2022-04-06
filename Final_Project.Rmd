@@ -88,9 +88,21 @@ PPtableData <- Pitt_2017 %>%
   select(gameId, situation, shotsOnGoalFor, missedShotsFor, blockedShotAttemptsFor, shotAttemptsFor, goalsFor, propShotsThrough)
 ```
 
+```{r}
+# Look at correlation between PP icetime and total goals scored on the season for each team 
+
+season_2017 <- hockey_data %>%
+  filter(situation == "5on4") %>%
+  select(team, season, goalsFor, iceTime) 
+  # pivot_longer(cols= 1:3, names_to = "team", values_to = "goalsFor") # find a way to make teams for columnns and icetime/goalsfor for rows.
+# add up totals and display on the graph (teams on x axis, ranking on y axis.)
+  
+```
+
 
 ```{r}
 library(shiny)
+library(tidyverse) 
 
 ui <- fluidPage(
   
@@ -108,11 +120,11 @@ ui <- fluidPage(
   
 ),
   tabPanel("IceTime", fluid = TRUE, 
-           titlePanel("More Icetime = More Goals?"), 
+           titlePanel("More PP Icetime = More Goals?"), 
            
            sidebarLayout(sidebarPanel(
-             selectInput("opponentchoice", 
-            label = "Choose a Team", choices= levels(factor(Pitt_2017$opposingTeam)), selected = "NYR")), 
+             selectInput("yearChoice", 
+            label = "Choose a Season", choices= levels(factor(season_2017$season)), selected = "2008")), 
             mainPanel = (plotOutput("scatter"))
            ))))
 
@@ -123,7 +135,7 @@ server <- function(input, output, session) {
   })
   
   iceTime_sub <- reactive({
-    Pitt_2017 %>% filter(opposingTeam == input$opponentchoice)
+    season_2017 %>% filter(season == input$yearChoice)
   })
   
   scatter_plot <- reactive({ 
@@ -147,6 +159,10 @@ server <- function(input, output, session) {
   output$goaltable <- renderTable({
     goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice)
       
+  })
+  
+  output$scatter <- renderPlot({
+    scatter_plot2()
   })
 }
 
@@ -176,4 +192,3 @@ shinyApp(ui, server)
                  # var_choices <- names(PP_shots)[2:4]
                  
                  
-  Tomorrow, 3/30, begin making second part of app with radio buttons to choose all situations of shots to see it on a wider scale for the 2017 pittsburgh penguins. Also, ask how to create a reactive table for each. 
