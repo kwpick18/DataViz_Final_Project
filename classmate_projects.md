@@ -18,3 +18,9 @@ Kyle: He is making a shiny app similar to mine where he is looking at NFL stats 
 
 Meyer: he is making a shiny app looking at different statistics from the MLS. You can select which region you want to look at and from there you can select a team from that league to look at statistics like expected goals, assists, value of the team, etc. Just like my partner last week, he used different tabs to make the shiny app more user friendly and cleaner which is something I'd like to incorporate in my project. 
 
+## April 6th: 
+
+My partner today is working with stats from the PGA to create a shiny app comparing the players statistics from each tournament they've played in to determine what were the most important areas to be good in for each tournament. You can select the tournament you want to look at and a box plot will appear with standard deviations for each stat presented in the data set for that specific tournament. His data set is a bit limited with what variables are available so more web-scraping may be necessary. 
+
+
+

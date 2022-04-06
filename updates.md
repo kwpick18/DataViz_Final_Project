@@ -37,3 +37,7 @@ I cleaned up my tabular data in my initial shiny app by selecting only columns t
 ## April 6th Beginning of Class
 
 I figured out how to create a second tab and began working on what to put in that tab. I tried a similar thing to my first tab but I didn't like that they were almost the same thing. I'm now trying to manipulate the data so I can look at the correlation between icetime for a team on the Powerplay and total powerplay goals over the course of all seasons recorded in my data set. 
+
+## April 6th End of Class
+
+I manipulated the data enough for my icetime/goals/season for each team app to be able to work with it. I still have to input the set into the shiny app code but being able to have the data in a place where it makes sense is a good start. I also realized that my PP ice time wasn't per player but instead it was input as seconds of icetime. That changes things in the way the data will be presented. I will work over the weekend on completing the second tab of my app. 
