@@ -94,7 +94,7 @@ PPtableData <- Pitt_2017 %>%
 season_2017 <- hockey_data %>%
   filter(situation == "5on4") %>%
   select(team, season, goalsFor, iceTime) %>%
-  bind_rows(summarise_all(., ~if(is.numeric(.)) sum(.) else "Total")) %>%
+  bind_rows(summarise_all(., ~if(is.numeric(.)) sum(.) else "Total"))
   
   # pivot_longer(cols= 1:3, names_to = "team", values_to = "goalsFor") # find a way to make teams for columnns and icetime/goalsfor for rows.
 # add up totals and display on the graph (teams on x axis, ranking on y axis.)
@@ -103,13 +103,16 @@ season_2017 <- hockey_data %>%
 ```
 
 ```{r}
-team_ice_goals_totals <- 
-  season_2017 %>%
+library(tidyverse) 
+
+powerplay_2017_all <- season_2017 %>%
   group_by(team, season) %>%
   mutate(sumgoals = cumsum(goalsFor)) %>%
   mutate(sumice = cumsum(iceTime)/60) %>%
-  filter(sumice == max(sumice)) #%>%
-  # mutate(prop_goalsperice = goalsFor/iceTime) 
+  filter(sumice == max(sumice)) %>%
+  mutate(prop_goalsperice = sumgoals/sumice)
+  
+   
 ```
 
 
@@ -138,8 +141,8 @@ ui <- fluidPage(
            
            sidebarLayout(sidebarPanel(
              selectInput("yearChoice", 
-            label = "Choose a Season", choices= levels(factor(season_2017$season)), selected = "2008")), 
-            mainPanel = (plotOutput("scatter"))
+            label = "Choose a Season", choices= levels(factor(powerplay_2017_all$season)), selected = "2008")), 
+            mainPanel = (plotOutput("barchart"))
            ))))
 
 server <- function(input, output, session) {
@@ -149,7 +152,7 @@ server <- function(input, output, session) {
   })
   
   iceTime_sub <- reactive({
-    season_2017 %>% filter(season == input$yearChoice)
+    powerplay_2017_all %>% filter(season == input$yearChoice)
   })
   
   scatter_plot <- reactive({ 
@@ -161,9 +164,13 @@ server <- function(input, output, session) {
       labs(x = "Goals Scored", y = "Proportion of Shot Attempts On Net")
   })
   
-  scatter_plot2 <- reactive({
-    ggplot(iceTime_sub(), aes(x = goalsFor, y = iceTime)) +
-      geom_point()
+  bar_chart <- reactive({
+    ggplot(iceTime_sub(), aes(x = reorder(team, -prop_goalsperice), y = prop_goalsperice, fill = team)) +
+      geom_col() +
+      theme_classic() +
+      scale_color_viridis_c() +
+      labs(x = "Team", y = "Goals Scored Per Minute of Icetime" ) +
+      theme(legend.position = "none") 
   })
   
   output$scatterplot <- renderPlot({
@@ -175,8 +182,8 @@ server <- function(input, output, session) {
       
   })
   
-  output$scatter <- renderPlot({
-    scatter_plot2()
+  output$barchart <- renderPlot({
+    bar_chart()
   })
 }
 

@@ -41,3 +41,7 @@ I figured out how to create a second tab and began working on what to put in tha
 ## April 6th End of Class
 
 I manipulated the data enough for my icetime/goals/season for each team app to be able to work with it. I still have to input the set into the shiny app code but being able to have the data in a place where it makes sense is a good start. I also realized that my PP ice time wasn't per player but instead it was input as seconds of icetime. That changes things in the way the data will be presented. I will work over the weekend on completing the second tab of my app. 
+
+## April 11th (off day) 
+
+I changed my approach on my second panel of the slide to make it easier to read and vizualize. I ran into some trouble when trying to manipulate the data enough to have it make sense in a visualization and be helpful by i think it looks good. I changed the color scales on my bar chart but doesn't seem to be affecting the color. Ill have to figure that out for wednesday. 
