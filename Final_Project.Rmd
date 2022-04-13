@@ -142,7 +142,8 @@ ui <- fluidPage(
            sidebarLayout(sidebarPanel(
              selectInput("yearChoice", 
             label = "Choose a Season", choices= levels(factor(powerplay_2017_all$season)), selected = "2008")), 
-            mainPanel = (plotOutput("barchart"))
+            mainPanel = (plotOutput("barchart"),
+                         tableOutput("icetimeTable"))
            ))))
 
 server <- function(input, output, session) {
@@ -181,6 +182,11 @@ server <- function(input, output, session) {
     goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice)
       
   })
+  
+  output$icetimeTable <- renderTable({
+    PPFilter <- subset(powerplay_2017_all, season_2017$season == input$yearchoice)
+      
+  }) ###Fix this### 
   
   output$barchart <- renderPlot({
     bar_chart()

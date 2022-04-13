@@ -45,3 +45,8 @@ I manipulated the data enough for my icetime/goals/season for each team app to b
 ## April 11th (off day) 
 
 I changed my approach on my second panel of the slide to make it easier to read and vizualize. I ran into some trouble when trying to manipulate the data enough to have it make sense in a visualization and be helpful by i think it looks good. I changed the color scales on my bar chart but doesn't seem to be affecting the color. Ill have to figure that out for wednesday. 
+
+
+## April 13th (no class) 
+
+I've been attempting for a while now to add another reactive table to my second panel but am getting mixed up with some of my previous naming of data sets I want to use. I thought I had it correct but it still doesn't seem to be working. I will continue to attempt to make it work over the weekend with success hopefully. 
