@@ -50,3 +50,5 @@ I changed my approach on my second panel of the slide to make it easier to read 
 ## April 13th (no class) 
 
 I've been attempting for a while now to add another reactive table to my second panel but am getting mixed up with some of my previous naming of data sets I want to use. I thought I had it correct but it still doesn't seem to be working. I will continue to attempt to make it work over the weekend with success hopefully. 
+
+MH: Need a little more evidence of an attempt here: it looks like only 2 lines were added to your markdown file for this commit. Since this is some evidence of an attempt, can earn 5/9 points for this commit.
