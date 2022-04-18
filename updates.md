@@ -51,7 +51,9 @@ I changed my approach on my second panel of the slide to make it easier to read 
 
 I've been attempting for a while now to add another reactive table to my second panel but am getting mixed up with some of my previous naming of data sets I want to use. I thought I had it correct but it still doesn't seem to be working. I will continue to attempt to make it work over the weekend with success hopefully. 
 
+<<<<<<< HEAD
 
 ## April 18th Beginning of Class
 
 Over the weekend, I did a complete overhaul of my second panel. I realized that it wasn't visualizing what I had hoped for and really didnt serve much of a purpose. I spent most of my time figuring out how I could get number of goals on the Y axis (which was easy) with both Icetime per season on the powerplay and the season variable both on the x-axis. I still have some work to do cleaning it up but I think the visualization will be much more clear now. I also added the table i was trying to add. 
+
