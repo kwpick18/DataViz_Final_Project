@@ -98,7 +98,7 @@ season_2017 <- hockey_data %>%
   
   # pivot_longer(cols= 1:3, names_to = "team", values_to = "goalsFor") # find a way to make teams for columnns and icetime/goalsfor for rows.
 # add up totals and display on the graph (teams on x axis, ranking on y axis.)
-  
+   
 
 ```
 
