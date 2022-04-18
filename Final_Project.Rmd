@@ -115,6 +115,13 @@ powerplay_2017_all <- season_2017 %>%
    
 ```
 
+```{r}
+library(tidyverse) 
+
+icetime_table_data <- powerplay_2017_all %>%
+  select(sumgoals, sumice, prop_goalsperice) 
+```
+
 
 
 ```{r}
@@ -140,9 +147,9 @@ ui <- fluidPage(
            titlePanel("More PP Icetime = More Goals?"), 
            
            sidebarLayout(sidebarPanel(
-             selectInput("yearChoice", 
-            label = "Choose a Season", choices= levels(factor(powerplay_2017_all$season)), selected = "2008")), 
-            mainPanel = (plotOutput("barchart"),
+             selectInput("teamchoice", 
+            label = "Choose a Team", choices= levels(factor(powerplay_2017_all$team)), selected = "NYR")), 
+            mainPanel(plotOutput("barchart"),
                          tableOutput("icetimeTable"))
            ))))
 
@@ -153,7 +160,7 @@ server <- function(input, output, session) {
   })
   
   iceTime_sub <- reactive({
-    powerplay_2017_all %>% filter(season == input$yearChoice)
+    powerplay_2017_all %>% filter(team == input$teamchoice)
   })
   
   scatter_plot <- reactive({ 
@@ -166,11 +173,11 @@ server <- function(input, output, session) {
   })
   
   bar_chart <- reactive({
-    ggplot(iceTime_sub(), aes(x = reorder(team, -prop_goalsperice), y = prop_goalsperice, fill = team)) +
+    ggplot(iceTime_sub(), aes(x = reorder(season, -sumice), y = sumgoals, fill = season)) +
       geom_col() +
       theme_classic() +
       scale_color_viridis_c() +
-      labs(x = "Team", y = "Goals Scored Per Minute of Icetime" ) +
+      labs(x = "Season", y = "Goals Scored" ) +
       theme(legend.position = "none") 
   })
   
@@ -184,9 +191,9 @@ server <- function(input, output, session) {
   })
   
   output$icetimeTable <- renderTable({
-    PPFilter <- subset(powerplay_2017_all, season_2017$season == input$yearchoice)
+    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice)
       
-  }) ###Fix this### 
+  })  
   
   output$barchart <- renderPlot({
     bar_chart()
@@ -195,6 +202,10 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
+
+
+## For monday 4/18, figure out how to order in descending order in my icetime table so that reader can compare the two visuals easier. 
+
 
 #Extra code for shiny 
 
