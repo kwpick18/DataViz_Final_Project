@@ -112,7 +112,7 @@ powerplay_2017_all <- season_2017 %>%
   filter(sumice == max(sumice)) %>%
   mutate(prop_goalsperice = sumgoals/sumice)
   
-   
+    
 ```
 
 ```{r}

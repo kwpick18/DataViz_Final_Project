@@ -59,4 +59,4 @@ Over the weekend, I did a complete overhaul of my second panel. I realized that 
 
 ## April 18th End of class
 
-During class, I manipulated by ice_time_table data set to get rid of totals and began to change the names of a few variables that were not matching where i needed them to match. I also put my bar graph in descending order but still haven't gotten to making my table in descending order on my second panel. That will be first on the list for between today and wednesday. My if-else statement should fix the problem of different names for the same team. Also will be completed by Wednesday. 
+During class, I manipulated by ice_time_table data set to get rid of totals and began to change the names of a few variables that were not matching where i needed them to match. I also put my bar graph in descending order but still haven't gotten to making my table in descending order on my second panel. That will be first on the list for between today and wednesday. My if-else statement should fix the problem of different names for the same team. Also will be completed by Wednesday.  
