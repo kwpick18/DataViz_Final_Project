@@ -22,5 +22,7 @@ Meyer: he is making a shiny app looking at different statistics from the MLS. Yo
 
 My partner today is working with stats from the PGA to create a shiny app comparing the players statistics from each tournament they've played in to determine what were the most important areas to be good in for each tournament. You can select the tournament you want to look at and a box plot will appear with standard deviations for each stat presented in the data set for that specific tournament. His data set is a bit limited with what variables are available so more web-scraping may be necessary. 
 
+## April 18th: 
 
+My partner today, Tom, is working on an R package that allows you to put different Queries into the console that will show different visualizations for a Covid Data set that he scraped from the internet. He gave me a few ideas for making my tables more interactive as well as allowing the user to choose the color scale for my tables. He was really helpful in helping me advance my project. 
 
