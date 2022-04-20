@@ -85,7 +85,8 @@ shotsThrough_sub <- Pitt_2017 %>%
 
 ```{r}
 PPtableData <- Pitt_2017 %>%
-  select(gameId, situation, shotsOnGoalFor, missedShotsFor, blockedShotAttemptsFor, shotAttemptsFor, goalsFor, propShotsThrough)
+  select(gameId, situation, shotsOnGoalFor, missedShotsFor, blockedShotAttemptsFor, shotAttemptsFor, goalsFor, propShotsThrough) %>%
+  arrange(desc(propShotsThrough)) 
 ```
 
 ```{r}
@@ -96,9 +97,6 @@ season_2017 <- hockey_data %>%
   select(team, season, goalsFor, iceTime) %>%
   bind_rows(summarise_all(., ~if(is.numeric(.)) sum(.) else "Total"))
   
-  # pivot_longer(cols= 1:3, names_to = "team", values_to = "goalsFor") # find a way to make teams for columnns and icetime/goalsfor for rows.
-# add up totals and display on the graph (teams on x axis, ranking on y axis.)
-   
 
 ```
 
@@ -110,7 +108,12 @@ powerplay_2017_all <- season_2017 %>%
   mutate(sumgoals = cumsum(goalsFor)) %>%
   mutate(sumice = cumsum(iceTime)/60) %>%
   filter(sumice == max(sumice)) %>%
-  mutate(prop_goalsperice = sumgoals/sumice)
+  mutate(prop_goalsperice = sumgoals/sumice) %>%
+  mutate(team = str_replace(string = team, "N.J", "NJD")) %>%
+  mutate(team = str_replace(team, "S.J", "SJS")) %>%
+  mutate(team = str_replace(team, "T.B", "TBL")) %>%
+  mutate(team = str_replace(team, "L.A", "LAK")) %>%
+  distinct(team, .keep_all = TRUE) 
   
     
 ```
@@ -119,15 +122,13 @@ powerplay_2017_all <- season_2017 %>%
 library(tidyverse) 
 
 icetime_table_data <- powerplay_2017_all %>%
-  select(team, season, sumgoals, sumice, prop_goalsperice)
-  
-icetime_table_data2 <- icetime_table_data %>%
-  mutate(., if_else("N.J", "NJD", team))
-
-
-print(icetime_table_data)
-  
-## Use IF Else to change NJD to N.J and LAK to L.A
+  select(team, season, sumgoals, sumice, prop_goalsperice) %>%
+  mutate(team = str_replace(string = team, "N.J", "NJD")) %>%
+  mutate(team = str_replace(team, "S.J", "SJS")) %>%
+  mutate(team = str_replace(team, "T.B", "TBL")) %>%
+  mutate(team = str_replace(team, "L.A", "LAK")) %>% 
+  distinct() %>%
+  arrange(desc(prop_goalsperice)) 
 ```
 
 
@@ -194,14 +195,12 @@ server <- function(input, output, session) {
   })
   
   output$goaltable <- renderTable({
-    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice) #%>%
-      ## arrange(PPtableData, desc("sumgoals")) 
+    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice) 
       
   })
   
   output$icetimeTable <- renderTable({
-    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice) #%>%
-      ## arrange(icetime_table_data, desc("sumice"))
+    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice) 
       
   })  
   

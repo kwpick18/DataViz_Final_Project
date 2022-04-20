@@ -26,3 +26,6 @@ My partner today is working with stats from the PGA to create a shiny app compar
 
 My partner today, Tom, is working on an R package that allows you to put different Queries into the console that will show different visualizations for a Covid Data set that he scraped from the internet. He gave me a few ideas for making my tables more interactive as well as allowing the user to choose the color scale for my tables. He was really helpful in helping me advance my project. 
 
+## April 20th: 
+
+My partner today was Emil and he is using a NHL Statistics data set to create a shiny app. He has 4 or 5 different panels looking at different areas of the game where the statistics are indicators of how good or bad a team was for that season. The most impressive part of the app is the empty-netter shot per minute interactive graph he has. I need to incorporate some of the things he has done in his project into mine. 

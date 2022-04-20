@@ -64,3 +64,7 @@ During class, I manipulated by ice_time_table data set to get rid of totals and 
 ## April 20th Beginning of class
 
 Probaby doesn't look like I did much because I didn't make any progress. I labored over how to use ifelse statements for about an hour and a half before giving up and moving on to trying to arrange my tables in descending order for another 1 or so. It seems like I've tried everything by now but I guess I just don't understand the syntax and how to put it into a shiny app. 
+
+## April 20th End Of class
+
+I made some really good progress this class. I was going about changing my variable names all wrong. Instead of ifelse statements, I used string_replace which did the trick right away. I then had to alter my data set so that there were no duplicates which could skew the data. I finally have the second panel tidied up to where I want it to be. My plan is to add a 3rd panel that is something we haven't done in class so I can get more credit for my project and hopefully have something interesting to report! 
