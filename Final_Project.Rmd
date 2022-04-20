@@ -119,14 +119,17 @@ powerplay_2017_all <- season_2017 %>%
 library(tidyverse) 
 
 icetime_table_data <- powerplay_2017_all %>%
-  select(team, season, sumgoals, sumice, prop_goalsperice) %>%
-  if team =="N.J" = TRUE, team == "NJD"
+  select(team, season, sumgoals, sumice, prop_goalsperice)
+  
+icetime_table_data2 <- icetime_table_data %>%
+  mutate(., if_else("N.J", "NJD", team))
+
+
+print(icetime_table_data)
+  
 ## Use IF Else to change NJD to N.J and LAK to L.A
 ```
 
-```{r}
-filtered_icetime_table_data <- icetime_table_data[-c(299, 445),]
-```
 
 
 ```{r}
@@ -191,12 +194,14 @@ server <- function(input, output, session) {
   })
   
   output$goaltable <- renderTable({
-    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice)
+    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice) #%>%
+      ## arrange(PPtableData, desc("sumgoals")) 
       
   })
   
   output$icetimeTable <- renderTable({
-    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice)
+    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice) #%>%
+      ## arrange(icetime_table_data, desc("sumice"))
       
   })  
   
@@ -209,7 +214,7 @@ shinyApp(ui, server)
 ```
 
 
-## For monday 4/18, figure out how to order in descending order in my icetime table so that reader can compare the two visuals easier. 
+## For Wednesday 4/20, ask how to arrange tables in descending order and clarify how ifelse statements work. I've tried getting the if else statements right and it isn't working for my data set. 
 
 
 #Extra code for shiny 
