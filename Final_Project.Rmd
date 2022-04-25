@@ -131,13 +131,21 @@ icetime_table_data <- powerplay_2017_all %>%
   arrange(desc(prop_goalsperice)) 
 ```
 
+```{r}
+install.packages("shinycssloaders") 
+```
+
 
 
 ```{r}
 library(shiny)
 library(tidyverse) 
+library(bslib)
+library(shinycssloaders)
+thematic::thematic_shiny(font = "auto")
 
 ui <- fluidPage(
+  theme = bs_theme(),
   
   tabsetPanel(
     tabPanel("More Shots = More Goals?", fluid = TRUE, 
@@ -147,22 +155,36 @@ ui <- fluidPage(
     selectInput("opponentchoice",
     label = "Choose an Opponent", choices = levels(factor(Pitt_2017$opposingTeam)),
     selected = "STL")),
-                mainPanel(plotOutput("scatterplot"),
-                          tableOutput("goaltable"))
+                mainPanel(shinycssloaders::withSpinner(plotOutput("scatterplot"),
+                          tableOutput("goaltable")))
                 )
   
 ),
   tabPanel("IceTime", fluid = TRUE, 
-           titlePanel("More PP Icetime = More Goals?"), 
+           titlePanel("More Powerplay Icetime = More Goals?"), 
            
            sidebarLayout(sidebarPanel(
              selectInput("teamchoice", 
             label = "Choose a Team", choices= levels(factor(icetime_table_data$team)), selected = "NYR")), 
             mainPanel(plotOutput("barchart"),
                          tableOutput("icetimeTable"))
-           ))))
+           )), 
+  tabPanel("YourChoice", fluid = TRUE, 
+           titlePanel("What Are You Curious About?"), 
+           
+           sidebarLayout(sidebarPanel(
+             selectInput("clubchoice", 
+            label = "Choose a Hockey Team", choices= levels(factor(hockey_data$team)), 
+            selected = "PIT"))), 
+           #(sidebarPanel(selectInput("yearchoice", 
+            #label = "Choose a Season", choices = levels(factor(hockey_data$season)), 
+            #selected = "2008")) 
+           #))
+))))
 
 server <- function(input, output, session) {
+  
+  bs_themer()
   
   shotsThrough_sub <- reactive({
     Pitt_2017 %>% filter(opposingTeam == input$opponentchoice)

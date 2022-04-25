@@ -68,3 +68,7 @@ Probaby doesn't look like I did much because I didn't make any progress. I labor
 ## April 20th End Of class
 
 I made some really good progress this class. I was going about changing my variable names all wrong. Instead of ifelse statements, I used string_replace which did the trick right away. I then had to alter my data set so that there were no duplicates which could skew the data. I finally have the second panel tidied up to where I want it to be. My plan is to add a 3rd panel that is something we haven't done in class so I can get more credit for my project and hopefully have something interesting to report! 
+
+## April 25th Beginning of Class
+
+Over the weekend, I did a lot of research on cool things to add to my app to make it better and more fun for the user. I added a theme adjuster to my project where the user can make it whatever color or theme they would like. I tried adding a spinning wheel when it loads new visualizations but haven't got that to work yet. I also started on making my 3rd panel which will be a "curiousity" slide for the user to do pretty much whatever they want with. 
