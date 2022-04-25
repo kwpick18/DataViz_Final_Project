@@ -29,3 +29,7 @@ My partner today, Tom, is working on an R package that allows you to put differe
 ## April 20th: 
 
 My partner today was Emil and he is using a NHL Statistics data set to create a shiny app. He has 4 or 5 different panels looking at different areas of the game where the statistics are indicators of how good or bad a team was for that season. The most impressive part of the app is the empty-netter shot per minute interactive graph he has. I need to incorporate some of the things he has done in his project into mine. 
+
+## April 25th 
+
+My partner today was Kasey. She is working on a swimming shiny app to show the winners of the olympics as well as different events within swimming from different years. She has a lot of tabs and it looks really good. Her radio buttons are something that I would like to add as well to my project. ` 

@@ -72,3 +72,7 @@ I made some really good progress this class. I was going about changing my varia
 ## April 25th Beginning of Class
 
 Over the weekend, I did a lot of research on cool things to add to my app to make it better and more fun for the user. I added a theme adjuster to my project where the user can make it whatever color or theme they would like. I tried adding a spinning wheel when it loads new visualizations but haven't got that to work yet. I also started on making my 3rd panel which will be a "curiousity" slide for the user to do pretty much whatever they want with. 
+
+## April 25th End of Class
+
+I got my 3rd panel to work where the user will be able to input what they want to see and search the entire data set for what they are interested in. I will only include variables that make sense to someone who doesn't know anything about the data set such as goals for, goals against, etc. I will add radio buttons so they can choose what category and another drop down menu for the season they wish to look into. Once I get that buttoned up, the app will be in a good place! 

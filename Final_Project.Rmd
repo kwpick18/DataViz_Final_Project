@@ -131,17 +131,12 @@ icetime_table_data <- powerplay_2017_all %>%
   arrange(desc(prop_goalsperice)) 
 ```
 
-```{r}
-install.packages("shinycssloaders") 
-```
-
 
 
 ```{r}
 library(shiny)
 library(tidyverse) 
 library(bslib)
-library(shinycssloaders)
 thematic::thematic_shiny(font = "auto")
 
 ui <- fluidPage(
@@ -155,11 +150,11 @@ ui <- fluidPage(
     selectInput("opponentchoice",
     label = "Choose an Opponent", choices = levels(factor(Pitt_2017$opposingTeam)),
     selected = "STL")),
-                mainPanel(shinycssloaders::withSpinner(plotOutput("scatterplot"),
+                mainPanel(plotOutput("scatterplot"),
                           tableOutput("goaltable")))
                 )
   
-),
+,
   tabPanel("IceTime", fluid = TRUE, 
            titlePanel("More Powerplay Icetime = More Goals?"), 
            
@@ -168,14 +163,16 @@ ui <- fluidPage(
             label = "Choose a Team", choices= levels(factor(icetime_table_data$team)), selected = "NYR")), 
             mainPanel(plotOutput("barchart"),
                          tableOutput("icetimeTable"))
-           )), 
+           )
+), 
   tabPanel("YourChoice", fluid = TRUE, 
            titlePanel("What Are You Curious About?"), 
            
            sidebarLayout(sidebarPanel(
              selectInput("clubchoice", 
             label = "Choose a Hockey Team", choices= levels(factor(hockey_data$team)), 
-            selected = "PIT"))), 
+            selected = "PIT")), 
+            mainPanel = plotOutput("yourchoicegraph") 
            #(sidebarPanel(selectInput("yearchoice", 
             #label = "Choose a Season", choices = levels(factor(hockey_data$season)), 
             #selected = "2008")) 
@@ -192,6 +189,10 @@ server <- function(input, output, session) {
   
   iceTime_sub <- reactive({
    icetime_table_data %>% filter(team == input$teamchoice)
+  })
+  
+  yourChoiceSub <- reactive({
+   hockey_data %>% filter(team == input$clubchoice)
   })
   
   scatter_plot <- reactive({ 
@@ -212,6 +213,11 @@ server <- function(input, output, session) {
       theme(legend.position = "none") 
   })
   
+  choice_viz <- reactive ({
+    ggplot(yourChoiceSub(), aes(x = season, y = goalsFor)) +
+             geom_col()
+  })
+  
   output$scatterplot <- renderPlot({
     scatter_plot()
   })
@@ -229,13 +235,15 @@ server <- function(input, output, session) {
   output$barchart <- renderPlot({
     bar_chart()
   })
+  
+  output$yourchoicegraph <- renderPlot({
+    choice_viz()
+  })
 }
 
 shinyApp(ui, server)
 ```
 
-
-## For Wednesday 4/20, ask how to arrange tables in descending order and clarify how ifelse statements work. I've tried getting the if else statements right and it isn't working for my data set. 
 
 
 #Extra code for shiny 
