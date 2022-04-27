@@ -76,3 +76,7 @@ Over the weekend, I did a lot of research on cool things to add to my app to mak
 ## April 25th End of Class
 
 I got my 3rd panel to work where the user will be able to input what they want to see and search the entire data set for what they are interested in. I will only include variables that make sense to someone who doesn't know anything about the data set such as goals for, goals against, etc. I will add radio buttons so they can choose what category and another drop down menu for the season they wish to look into. Once I get that buttoned up, the app will be in a good place! 
+
+## April 27th Beginning of Class
+
+I changed my 3rd panel to be reactive on the x and y axis according to the input by the user, but i'm having an issue with an error and need to fix it. I included both sets of radio buttons that I want and I think it will look really cool once I figure out how to format it in a way that will work. 

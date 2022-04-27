@@ -25,6 +25,7 @@ power_play <- hockey_data %>%
 short_handed <- hockey_data %>%
   filter(situation == "4on5")
 
+
 other_situations <- hockey_data %>%
   filter(situation == "other") 
 ```
@@ -79,8 +80,8 @@ PP_other_situations_small <- Pitt_2017 %>%
 shotsThrough_sub <- Pitt_2017 %>% 
   filter(opposingTeam == "WSH")
 
- ggplot(shotsThrough_sub, aes(x = propShotsThrough, y = goalsFor)) +
-  geom_point()
+PP_short_handed <- pittsburgh_penguins %>%
+  filter(situation == "4on5")
 ```
 
 ```{r}
@@ -134,6 +135,9 @@ icetime_table_data <- powerplay_2017_all %>%
 
 
 ```{r}
+
+var_choices <- names(hockey_data) [25:30] #39:41, 56, 73:78, 86, 89]
+
 library(shiny)
 library(tidyverse) 
 library(bslib)
@@ -172,11 +176,12 @@ ui <- fluidPage(
              selectInput("clubchoice", 
             label = "Choose a Hockey Team", choices= levels(factor(hockey_data$team)), 
             selected = "PIT")), 
+            radioButtons("varchoice1", label = "Choose a Statistic for the X-Axis", 
+                         choices = var_choices), 
+            radioButtons("varchoice2", label = "Choose a Statisitc for the Y-Axis", 
+                         choices = var_choices),  
             mainPanel = plotOutput("yourchoicegraph") 
-           #(sidebarPanel(selectInput("yearchoice", 
-            #label = "Choose a Season", choices = levels(factor(hockey_data$season)), 
-            #selected = "2008")) 
-           #))
+
 ))))
 
 server <- function(input, output, session) {
@@ -214,7 +219,7 @@ server <- function(input, output, session) {
   })
   
   choice_viz <- reactive ({
-    ggplot(yourChoiceSub(), aes(x = season, y = goalsFor)) +
+    ggplot(yourChoiceSub(), aes(x = .data[[input$varchoice1]], y = .data[[input$varchoice2]])) +
              geom_col()
   })
   
@@ -245,27 +250,9 @@ shinyApp(ui, server)
 ```
 
 
+  
+  
+  
 
-#Extra code for shiny 
-
- small_shotsThrough_sub <- reactive({
-    shotsThrough_sub %>% filter(opposingTeam == input$gamechoice)
-  })
-  
-  scatter_plot <- reactive({
-    ggplot(small_shotsThrough_sub(), aes(x = .data[[input$varchoice]])) +
-      geom_point()
-  })
-  
-  output$scatterplot <- renderPlot({
-    scatter_plot()
-  })
-  
-  
-  
-  #radioButtons("varchoice", label = "Choose a Category",
-                 #choices = var_choices),
-                 
-                 # var_choices <- names(PP_shots)[2:4]
                  
                  
