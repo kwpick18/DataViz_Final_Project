@@ -80,3 +80,7 @@ I got my 3rd panel to work where the user will be able to input what they want t
 ## April 27th Beginning of Class
 
 I changed my 3rd panel to be reactive on the x and y axis according to the input by the user, but i'm having an issue with an error and need to fix it. I included both sets of radio buttons that I want and I think it will look really cool once I figure out how to format it in a way that will work. 
+
+## April 27th End of Class 
+
+My 3rd panel is working after trouble shooting a bunch of stuff. I want to add another selectInput to include a second team option so you can compare two different teams in their respective statistics. I will figure that out and make the visualization look nice over the weekend. I'm happy about where my project is right now. 

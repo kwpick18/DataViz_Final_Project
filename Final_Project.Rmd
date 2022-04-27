@@ -136,7 +136,7 @@ icetime_table_data <- powerplay_2017_all %>%
 
 ```{r}
 
-var_choices <- names(hockey_data) [25:30] #39:41, 56, 73:78, 86, 89]
+var_choices <- names(hockey_data)[c(25:30,39:41, 56, 73:78, 86, 89)]
 
 library(shiny)
 library(tidyverse) 
@@ -173,16 +173,17 @@ ui <- fluidPage(
            titlePanel("What Are You Curious About?"), 
            
            sidebarLayout(sidebarPanel(
-             selectInput("clubchoice", 
+             selectizeInput("clubchoice", 
             label = "Choose a Hockey Team", choices= levels(factor(hockey_data$team)), 
-            selected = "PIT")), 
-            radioButtons("varchoice1", label = "Choose a Statistic for the X-Axis", 
-                         choices = var_choices), 
-            radioButtons("varchoice2", label = "Choose a Statisitc for the Y-Axis", 
-                         choices = var_choices),  
-            mainPanel = plotOutput("yourchoicegraph") 
+            selected = "PIT")),
+            selectInput("varchoice1", label = "Choose a Statistic for the X-Axis", 
+                         choices = var_choices)),
+           selectInput("varchoice2", label = "Choose a Statisitc for the Y-Axis", 
+                         choices = var_choices),
+            mainPanel(plotOutput("yourchoicegraph")) 
 
-))))
+)
+))
 
 server <- function(input, output, session) {
   
@@ -220,7 +221,7 @@ server <- function(input, output, session) {
   
   choice_viz <- reactive ({
     ggplot(yourChoiceSub(), aes(x = .data[[input$varchoice1]], y = .data[[input$varchoice2]])) +
-             geom_col()
+             geom_point()
   })
   
   output$scatterplot <- renderPlot({
@@ -250,9 +251,11 @@ shinyApp(ui, server)
 ```
 
 
+x = .data[[input$varchoice1]], y = .data[[input$varchoice2]]
   
   
-  
+  radioButtons("varchoice2", label = "Choose a Statisitc for the Y-Axis", 
+                         choices = var_choices),
 
                  
                  

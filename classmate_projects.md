@@ -33,3 +33,7 @@ My partner today was Emil and he is using a NHL Statistics data set to create a 
 ## April 25th 
 
 My partner today was Kasey. She is working on a swimming shiny app to show the winners of the olympics as well as different events within swimming from different years. She has a lot of tabs and it looks really good. Her radio buttons are something that I would like to add as well to my project. ` 
+
+## April 27th 
+
+Claire is doing a shiny app on the NHL trade deadline and how successful a team is before and after they make trades. It's really interesting. Right now she's trying to create an error message for if a user were to input vegas or seattle when they weren't a team yet. Looks good to me so far!
