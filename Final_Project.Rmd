@@ -128,8 +128,7 @@ icetime_table_data <- powerplay_2017_all %>%
   mutate(team = str_replace(team, "S.J", "SJS")) %>%
   mutate(team = str_replace(team, "T.B", "TBL")) %>%
   mutate(team = str_replace(team, "L.A", "LAK")) %>% 
-  distinct() %>%
-  arrange(desc(prop_goalsperice)) 
+  distinct() 
 ```
 
 
@@ -183,7 +182,7 @@ ui <- fluidPage(
             mainPanel(plotOutput("yourchoicegraph")) 
 
 )
-))
+)) 
 
 server <- function(input, output, session) {
   
@@ -198,7 +197,7 @@ server <- function(input, output, session) {
   })
   
   yourChoiceSub <- reactive({
-   hockey_data %>% filter(team == input$clubchoice)
+   hockey_data %>% filter(team == input$clubchoice) 
   })
   
   scatter_plot <- reactive({ 
@@ -215,13 +214,15 @@ server <- function(input, output, session) {
       geom_col() +
       theme_classic() +
       scale_color_viridis_c() +
-      labs(x = "Season", y = "Goals Scored" ) +
+      labs(x = "Season", y = "PP Goals Scored" ) +
       theme(legend.position = "none") 
   })
   
   choice_viz <- reactive ({
     ggplot(yourChoiceSub(), aes(x = .data[[input$varchoice1]], y = .data[[input$varchoice2]])) +
-             geom_point()
+             geom_point() +
+            geom_smooth(method = lm) +
+            theme_classic() 
   })
   
   output$scatterplot <- renderPlot({
@@ -229,12 +230,14 @@ server <- function(input, output, session) {
   })
   
   output$goaltable <- renderTable({
-    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice) 
+    goalFilter <- subset(PPtableData, Pitt_2017$opposingTeam == input$opponentchoice) %>%
+      arrange(desc(gameId))
       
   })
   
   output$icetimeTable <- renderTable({
-    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice) 
+    PPFilter <- subset(icetime_table_data, powerplay_2017_all$team == input$teamchoice) %>%
+      arrange(desc(sumice))
       
   })  
   
