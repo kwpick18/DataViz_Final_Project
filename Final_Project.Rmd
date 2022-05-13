@@ -9,7 +9,8 @@ output: html_document
 library(tidyverse) 
 
 hockey_data <- read_csv("all_teams.csv") 
-pittsburgh_penguins <- read_csv("Pittsburgh_data.csv") 
+pittsburgh_penguins <- hockey_data %>%
+  filter(team == "PIT") 
 ```
 
 ```{r}
@@ -95,8 +96,7 @@ PPtableData <- Pitt_2017 %>%
 
 season_2017 <- hockey_data %>%
   filter(situation == "5on4") %>%
-  select(team, season, goalsFor, iceTime) %>%
-  bind_rows(summarise_all(., ~if(is.numeric(.)) sum(.) else "Total"))
+  select(team, season, goalsFor, iceTime) 
   
 
 ```
